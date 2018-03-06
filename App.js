@@ -1,10 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, Text, View, NativeModules, Platform } from 'react-native';
+import Logo from './components/logo'
+
+const { StatusBarManager } = NativeModules;
+
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBarManager.HEIGHT;
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Logo />
         <Text>Open up App.js to start working on your app!</Text>
         <Text>Changes you make will automatically reload.</Text>
         <Text>Shake your phone to open the developer menu.</Text>
@@ -18,6 +24,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: STATUSBAR_HEIGHT,
   },
 });
