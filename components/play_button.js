@@ -9,8 +9,8 @@ class PlayButton extends Component {
         <MaterialCommunityIcons.Button
         name="lightbulb-on-outline"
         backgroundColor="#efec4a"
-        onPress={() => { console.warn('Button pushed') }}>
-          <Text style={styles.textButton} >Get inspired! </Text>
+        onPress={() => { this.props.action() }}>
+          <Text style={styles.textButton} >Get inspired!</Text>
         </MaterialCommunityIcons.Button>
       </View>
     );
