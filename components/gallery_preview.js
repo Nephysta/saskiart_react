@@ -13,7 +13,7 @@ class GalleryPreview extends Component {
   }
 
   componentDidMount() {
-    fetch('http://10.1.10.119:3000/api/v1/pictures?limit=3')
+    fetch('http://192.168.1.11:3000/api/v1/pictures?limit=3')
       .then(response => response.json())
       .then(response => {
         this.setState({pictures: response})
@@ -40,7 +40,6 @@ class GalleryPreview extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row'
   }
 });
