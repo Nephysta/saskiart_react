@@ -1,6 +1,7 @@
 import React from 'react';
 import { StatusBar, StyleSheet, Text, View, NativeModules, Platform } from 'react-native';
 import Logo from './components/logo'
+import PlayButton from './components/play_button'
 
 const { StatusBarManager } = NativeModules;
 
@@ -11,6 +12,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Logo />
+        <PlayButton action={() => { console.warn('Button pressed.') }} />
         <Text>Open up App.js to start working on your app!</Text>
         <Text>Changes you make will automatically reload.</Text>
         <Text>Shake your phone to open the developer menu.</Text>
