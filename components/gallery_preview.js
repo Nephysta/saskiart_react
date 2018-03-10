@@ -8,7 +8,9 @@ class GalleryPreview extends Component {
     super(props);
 
     this.state = {
-      pictures: null
+      pictures: null,
+      action: props.action,
+      theme_display: props.themeDisplay
     };
   }
 
@@ -21,14 +23,21 @@ class GalleryPreview extends Component {
   }
 
   render() {
-    const {pictures} = this.state
+    const { action, pictures, theme_display, touchable } = this.state
 
     if (pictures) {
       return (
-        <View style={styles.container}>
-          <GalleryThumbnail image={(this.state.pictures[0] || {}).data} />
-          <GalleryThumbnail image={(this.state.pictures[1] || {}).data} />
-          <GalleryThumbnail image={(this.state.pictures[2] || {}).data} />
+        <View style={styles.container} >
+          {pictures.map((picture, i) => {
+            return <GalleryThumbnail
+              action={action ? (id) => {action(id)} : null}
+              id={picture.id}
+              key={picture.id}
+              number={pictures.length}
+              theme={theme_display ? picture.theme : null}
+              image={picture.data}
+            />
+          })}
         </View>
       );
     }
