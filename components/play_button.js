@@ -8,7 +8,7 @@ class PlayButton extends Component {
       <View>
         <MaterialCommunityIcons.Button
         name="lightbulb-on-outline"
-        backgroundColor="#efec4a"
+        backgroundColor="#f29bc1"
         onPress={() => { this.props.action() }}>
           <Text style={styles.textButton} >Get inspired!</Text>
         </MaterialCommunityIcons.Button>
