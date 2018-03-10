@@ -8,6 +8,7 @@ class GalleryPreview extends Component {
     super(props);
 
     this.state = {
+      limit: props.limit || 3,
       pictures: null,
       action: props.action,
       theme_display: props.themeDisplay
@@ -15,7 +16,9 @@ class GalleryPreview extends Component {
   }
 
   componentDidMount() {
-    fetch('http://192.168.1.11:3000/api/v1/pictures?limit=3')
+    const { limit } = this.state
+
+    fetch(`http://192.168.1.11:3000/api/v1/pictures?limit=${limit}`)
       .then(response => response.json())
       .then(response => {
         this.setState({pictures: response})
