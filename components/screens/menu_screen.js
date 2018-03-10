@@ -16,9 +16,9 @@ class MenuScreen extends Component {
     return (
       <View style={styles.container}>
         <Image
-          resizeMode={'stretch'}
+          resizeMode={'cover'}
           style={styles.background}
-          source={require('../../assets/img/background.jpg')}
+          source={require('../../assets/img/background.png')}
         />
         <Border style={styles.border}>
           <Logo style={styles.logo}/>
@@ -33,9 +33,12 @@ class MenuScreen extends Component {
 const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   background: {
+    height: win.height,
+    width: win.width,
     flex: 1,
     backgroundColor: '#f7f1cc',
-    position: 'absolute'
+    position: 'absolute',
+    top: STATUSBAR_HEIGHT
   },
   logo: {
     marginTop: 20,

@@ -15,7 +15,7 @@ class MainScreen extends Component {
         <Image
           resizeMode={'stretch'}
           style={styles.background}
-          source={require('../../assets/img/background.jpg')}
+          source={require('../../assets/img/background.png')}
         />
         <Border style={styles.border}>
           <Text>Theme here ...</Text>
@@ -30,9 +30,12 @@ class MainScreen extends Component {
 const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   background: {
+    height: win.height,
+    width: win.width,
     flex: 1,
     backgroundColor: '#f7f1cc',
-    position: 'absolute'
+    position: 'absolute',
+    top: STATUSBAR_HEIGHT
   },
   logo: {
     marginTop: 20,
