@@ -1,4 +1,4 @@
-import React, { Component }from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, Dimensions, View, Button, YellowBox, Icon } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 

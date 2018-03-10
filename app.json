@@ -4,6 +4,9 @@
     "slug": "saskiart",
     "sdkVersion": "25.0.0",
     "privacy": "public",
-    "orientation": "portrait"
+    "orientation": "portrait",
+    "android": {
+      "package": "com.eraleis.saskiart"
+    }
   }
 }
