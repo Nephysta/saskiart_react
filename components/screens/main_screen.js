@@ -20,7 +20,7 @@ class MainScreen extends Component {
         <Border style={styles.border}>
           <Text>Theme here ...</Text>
           <Text>Full scale drawing here ...</Text>
-          <GalleryPreview limit={4} />
+          <GalleryPreview themeDisplay={true} limit={4} />
         </Border>
       </View>
     );
