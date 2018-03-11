@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, NativeModules, Platform, Image, Dimensions } fr
 
 import Border from '../border'
 import GalleryPreview from '../gallery_preview'
+import Theme from '../theme'
 
 const { StatusBarManager } = NativeModules;
 
@@ -18,7 +19,7 @@ class MainScreen extends Component {
           source={require('../../assets/img/background.png')}
         />
         <Border style={styles.border}>
-          <Text>Theme here ...</Text>
+          <Theme />
           <Text>Full scale drawing here ...</Text>
           <GalleryPreview themeDisplay={true} limit={4} />
         </Border>
