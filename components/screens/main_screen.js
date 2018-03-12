@@ -10,7 +10,25 @@ const { StatusBarManager } = NativeModules;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBarManager.HEIGHT;
 
 class MainScreen extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      currentPicture: null
+    }
+  }
+
+  onPicturesLoad = (pictures) => {
+    this.setState({ currentPicture: pictures[0].data })
+  }
+
+  setCurrentPicture = (picture) => {
+    this.setState({ currentPicture: picture.data })
+  }
+
   render() {
+    const { currentPicture } = this.state
+
     return (
       <View style={styles.container}>
         <Image
@@ -20,8 +38,19 @@ class MainScreen extends Component {
         />
         <Border style={styles.border}>
           <Theme />
-          <Text>Full scale drawing here ...</Text>
-          <GalleryPreview themeDisplay={true} limit={4} />
+
+          <Image
+            resizeMode={'cover'}
+            style={styles.image}
+            source={ currentPicture ? {uri: currentPicture} : {} }
+          />
+
+          <GalleryPreview
+            onLoad={this.onPicturesLoad}
+            action={this.setCurrentPicture}
+            themeDisplay={true}
+            limit={4}
+          />
         </Border>
       </View>
     );
@@ -30,6 +59,10 @@ class MainScreen extends Component {
 
 const win = Dimensions.get('window');
 const styles = StyleSheet.create({
+  image: {
+    width: win.width / 1.5,
+    height: win.width / 1.5
+  },
   background: {
     height: win.height,
     width: win.width,
