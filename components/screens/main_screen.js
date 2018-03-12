@@ -15,16 +15,16 @@ class MainScreen extends Component {
 
     this.state = {
       currentPicture: null,
-      ideas: null
+      ideas: []
     }
   }
 
   onThemeLoad = (theme) => {
-    console.log(`onThemeLoad(${JSON.stringify(theme)})`)
     this.setState({ ideas: theme.id.split('/') })
   }
 
   onPicturesLoad = (pictures) => {
+    if (pictures.length == 0) { return }
     this.setState({ currentPicture: pictures[0].data })
   }
 

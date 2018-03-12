@@ -13,17 +13,23 @@ class GalleryPreview extends Component {
       pictures: null,
       action: props.action,
       theme_display: props.themeDisplay,
-      ideas: props.ideas || null
+      ideas: props.ideas || null,
+      didFetch: false
     }
-
-    this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(event) {
-    console.log(event)
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.state.didFetch) {
+      this.setState({ideas: this.props.ideas})
+      this.fetchPictures()
+    }
   }
 
   componentDidMount() {
+    this.fetchPictures()
+  }
+
+  fetchPictures() {
     const { limit, onLoad, ideas } = this.state
 
     if (ideas && ideas.length == 0) { return }
@@ -37,10 +43,12 @@ class GalleryPreview extends Component {
         this.setState({pictures: response})
         onLoad ? onLoad(this.state.pictures) : null
       })
+
+    this.setState({didFetch: true})
   }
 
   render() {
-    const { action, pictures, theme_display, touchable } = this.state
+    const { action, pictures, theme_display, limit } = this.state
 
     if (pictures) {
       return (
@@ -50,7 +58,7 @@ class GalleryPreview extends Component {
               action={action ? (id) => {action(id)} : null}
               id={picture.id}
               key={picture.id}
-              number={pictures.length}
+              number={limit}
               theme={theme_display ? picture.theme : null}
               image={picture.data}
             />
