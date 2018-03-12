@@ -4,7 +4,6 @@ import { StyleSheet, Text, View, NativeModules, Platform, Image, Dimensions } fr
 import Border from '../border'
 import GalleryPreview from '../gallery_preview'
 import Theme from '../theme'
-import RefreshButton from '../refresh_button'
 
 const { StatusBarManager } = NativeModules;
 
@@ -50,10 +49,6 @@ class MainScreen extends Component {
         <Border style={styles.border}>
           <Theme
             onLoad={this.onThemeLoad}
-          />
-
-          <RefreshButton
-            action={() => {this.props.navigation.navigate('Main')}}
           />
 
           <Image
