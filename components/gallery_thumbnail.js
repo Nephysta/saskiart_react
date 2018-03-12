@@ -17,22 +17,21 @@ class GalleryThumbnail extends Component {
   render() {
     const { id, theme, image, action } = this.state
     return (
-      <View style={styles.image_container} >
-        <TouchableOpacity
-          activeOpacity={action ? 0.4 : 1}
-          onPress={_ => { action ? action(id) : null}}
-        >
-          <Image
-            style={{
-              width: win.width / (this.state.number + 1),
-              height: win.height / (this.state.number + 1),
-              margin: 10
-            }}
-            source={{uri: image}}
-          />
-        </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={action ? 0.6 : 1}
+        style={styles.image_container}
+        onPress={_ => { action ? action({id: id, theme: theme, data: image}) : null}}
+      >
+        <Image
+          style={{
+            width: win.width / (this.state.number + 1),
+            height: win.width / (this.state.number + 1),
+            margin: 10
+          }}
+          source={{uri: image}}
+        />
         <Text numberOfLines={2} style={theme ? styles.image_text : {}} >{theme}</Text>
-      </View>
+      </TouchableOpacity>
     );
   }
 }

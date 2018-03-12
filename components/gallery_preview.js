@@ -8,6 +8,7 @@ class GalleryPreview extends Component {
     super(props);
 
     this.state = {
+      onLoad: props.onLoad,
       limit: props.limit || 3,
       pictures: null,
       action: props.action,
@@ -16,12 +17,13 @@ class GalleryPreview extends Component {
   }
 
   componentDidMount() {
-    const { limit } = this.state
+    const { limit, onLoad } = this.state
 
     fetch(`http://192.168.1.11:3000/api/v1/pictures?limit=${limit}`)
       .then(response => response.json())
       .then(response => {
         this.setState({pictures: response})
+        onLoad ? onLoad(this.state.pictures) : null
       })
   }
 
@@ -52,6 +54,7 @@ class GalleryPreview extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginBottom: 20,
     flexDirection: 'row'
   }
 });
