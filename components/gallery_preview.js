@@ -19,8 +19,7 @@ class GalleryPreview extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!this.state.didFetch) {
-      this.setState({ideas: this.props.ideas})
+    if (prevProps.ideas != this.props.ideas) {
       this.fetchPictures()
     }
   }
@@ -30,12 +29,12 @@ class GalleryPreview extends Component {
   }
 
   fetchPictures() {
-    const { limit, onLoad, ideas } = this.state
+    const { limit, onLoad } = this.state
 
-    if (ideas && ideas.length == 0) { return }
+    if (this.props.ideas && this.props.ideas.length == 0) { return }
 
     url = `${API_ENDPOINT}/api/v1/pictures?limit=${limit}`
-    if (ideas) { url += `&ideas=${ideas}` }
+    if (this.props.ideas) { url += `&ideas=${this.props.ideas}` }
 
     fetch(url)
       .then(response => response.json())
@@ -43,8 +42,6 @@ class GalleryPreview extends Component {
         this.setState({pictures: response})
         onLoad ? onLoad(this.state.pictures) : null
       })
-
-    this.setState({didFetch: true})
   }
 
   render() {

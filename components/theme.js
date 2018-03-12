@@ -13,6 +13,7 @@ class Theme extends Component {
 
   componentDidMount() {
     const { onLoad } = this.state
+    var self = this
 
     fetch(`${API_ENDPOINT}/api/v1/themes`)
       .then(response => response.json())
