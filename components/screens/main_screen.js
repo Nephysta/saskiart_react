@@ -14,8 +14,14 @@ class MainScreen extends Component {
     super(props)
 
     this.state = {
-      currentPicture: null
+      currentPicture: null,
+      ideas: null
     }
+  }
+
+  onThemeLoad = (theme) => {
+    console.log(`onThemeLoad(${JSON.stringify(theme)})`)
+    this.setState({ ideas: theme.id.split('/') })
   }
 
   onPicturesLoad = (pictures) => {
@@ -27,7 +33,7 @@ class MainScreen extends Component {
   }
 
   render() {
-    const { currentPicture } = this.state
+    const { currentPicture, ideas } = this.state
 
     return (
       <View style={styles.container}>
@@ -37,7 +43,9 @@ class MainScreen extends Component {
           source={require('../../assets/img/background.png')}
         />
         <Border style={styles.border}>
-          <Theme />
+          <Theme
+            onLoad={this.onThemeLoad}
+          />
 
           <Image
             resizeMode={'cover'}
@@ -50,6 +58,7 @@ class MainScreen extends Component {
             action={this.setCurrentPicture}
             themeDisplay={true}
             limit={4}
+            ideas={ideas}
           />
         </Border>
       </View>

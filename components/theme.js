@@ -4,14 +4,21 @@ import { StyleSheet, Text } from 'react-native';
 class Theme extends Component {
   constructor(props) {
     super(props)
-    this.state = { theme: null }
+
+    this.state = {
+      onLoad: props.onLoad,
+      theme: null
+    }
   }
 
   componentDidMount() {
-    fetch(`http://192.168.1.18:3000/api/v1/themes`)
+    const { onLoad } = this.state
+
+    fetch(`${API_ENDPOINT}/api/v1/themes`)
       .then(response => response.json())
       .then(response => {
         this.setState({theme: response})
+        onLoad ? onLoad(this.state.theme) : null
       })
   }
 

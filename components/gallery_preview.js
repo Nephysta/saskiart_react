@@ -12,14 +12,26 @@ class GalleryPreview extends Component {
       limit: props.limit || 3,
       pictures: null,
       action: props.action,
-      theme_display: props.themeDisplay
-    };
+      theme_display: props.themeDisplay,
+      ideas: props.ideas || null
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange(event) {
+    console.log(event)
   }
 
   componentDidMount() {
-    const { limit, onLoad } = this.state
+    const { limit, onLoad, ideas } = this.state
 
-    fetch(`http://192.168.1.11:3000/api/v1/pictures?limit=${limit}`)
+    if (ideas && ideas.length == 0) { return }
+
+    url = `${API_ENDPOINT}/api/v1/pictures?limit=${limit}`
+    if (ideas) { url += `&ideas=${ideas}` }
+
+    fetch(url)
       .then(response => response.json())
       .then(response => {
         this.setState({pictures: response})
