@@ -24,8 +24,12 @@ class MainScreen extends Component {
   }
 
   onPicturesLoad = (pictures) => {
-    if (pictures.length == 0) { return }
-    this.setState({ currentPicture: pictures[0].data })
+    if (pictures.length > 0) {
+      this.setState({ currentPicture: pictures[0].data })
+    }
+    else {
+      this.setState({ currentPicture: null })
+    }
   }
 
   setCurrentPicture = (picture) => {
