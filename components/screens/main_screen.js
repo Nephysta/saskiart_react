@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import { StyleSheet, Text, View, NativeModules, Platform, Image, Dimensions } from 'react-native'
+import { StackNavigator } from 'react-navigation'
 
 import Border from '../border'
 import GalleryPreview from '../gallery_preview'
 import Theme from '../theme'
+import DoneButton from '../done_button'
 
 const { StatusBarManager } = NativeModules;
 
@@ -56,6 +58,8 @@ class MainScreen extends Component {
             style={styles.image}
             source={ currentPicture ? {uri: currentPicture} : {} }
           />
+
+          <DoneButton action={_ => { this.props.navigation.navigate('UploadImage') }} />
 
           <GalleryPreview
             onLoad={this.onPicturesLoad}
