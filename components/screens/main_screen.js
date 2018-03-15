@@ -53,11 +53,13 @@ class MainScreen extends Component {
             onLoad={this.onThemeLoad}
           />
 
-          <Image
-            resizeMode={'cover'}
-            style={styles.image}
-            source={ currentPicture ? {uri: currentPicture} : {} }
-          />
+          <View style={ currentPicture ? styles.imageBackground : {} }>
+            <Image
+              resizeMode={'cover'}
+              style={styles.image}
+              source={ currentPicture ? {uri: currentPicture} : {} }
+            />
+          </View>
 
           <DoneButton action={_ => { this.props.navigation.navigate('UploadImage') }} />
 
@@ -78,7 +80,9 @@ const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   image: {
     width: win.width / 1.5,
-    height: win.width / 1.5
+    height: win.width / 1.5,
+    marginTop: 15,
+    marginLeft: 23
   },
   background: {
     height: win.height,
@@ -104,6 +108,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingTop: STATUSBAR_HEIGHT
   },
+  imageBackground: {
+    height: win.width / 1.10,
+    width: win.width / 1.25,
+    backgroundColor: '#fff'
+  }
 });
 
 export default MainScreen;
