@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, Dimensions, View, Button, YellowBox, Icon } from 'react-native';
+import React, { Component } from 'react'
+import { StyleSheet, Text, Dimensions, View, Button, YellowBox, Icon } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 class PlayButton extends Component {
@@ -7,9 +7,10 @@ class PlayButton extends Component {
     return (
       <View>
         <MaterialCommunityIcons.Button
-        name="lightbulb-on-outline"
-        backgroundColor="#f29bc1"
-        onPress={() => { this.props.action() }}>
+          name="lightbulb-on-outline"
+          backgroundColor="#f29bc1"
+          onPress={_ => { this.props.action() }}
+        >
           <Text style={styles.textButton} >Get inspired!</Text>
         </MaterialCommunityIcons.Button>
       </View>
