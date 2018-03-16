@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { StyleSheet, Text, View, NativeModules, Platform, Image, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, NativeModules, Platform, Image, Dimensions, ActivityIndicator } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 
 import Border from '../border'
@@ -16,7 +16,7 @@ class MainScreen extends Component {
     super(props)
 
     this.state = {
-      currentPicture: null,
+      currentPicture: undefined,
       ideas: []
     }
   }
@@ -27,7 +27,7 @@ class MainScreen extends Component {
 
   onPicturesLoad = (pictures) => {
     if (pictures.length > 0) {
-      this.setState({ currentPicture: pictures[0].data })
+      this.setState({ currentPicture: pictures[0] })
     }
     else {
       this.setState({ currentPicture: null })
@@ -35,7 +35,7 @@ class MainScreen extends Component {
   }
 
   setCurrentPicture = (picture) => {
-    this.setState({ currentPicture: picture.data })
+    this.setState({ currentPicture: picture })
   }
 
   render() {
@@ -53,11 +53,35 @@ class MainScreen extends Component {
             onLoad={this.onThemeLoad}
           />
 
-          <Image
-            resizeMode={'cover'}
-            style={styles.image}
-            source={ currentPicture ? {uri: currentPicture} : {} }
-          />
+          <View style={ styles.imageBackground }>
+            { currentPicture === undefined &&
+              <View style={ [styles.noImage, styles.image] }>
+                <ActivityIndicator size='large' color='#f29bc1' />
+              </View>
+            }
+
+            { currentPicture === null &&
+              <View style={ [styles.noImage, styles.image] }></View>
+            }
+
+            { currentPicture &&
+              <Image
+                resizeMode={'cover'}
+                style={styles.image}
+                source={ {uri: currentPicture.data} }
+              />
+            }
+
+            <View>
+              { currentPicture === null &&
+                <Text style={ styles.text }>No image for this theme, yet!</Text>
+              }
+
+              { currentPicture &&
+                <Text style={ styles.text }>{currentPicture.theme}</Text>
+              }
+            </View>
+          </View>
 
           <DoneButton action={_ => { this.props.navigation.navigate('UploadImage') }} />
 
@@ -78,7 +102,8 @@ const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   image: {
     width: win.width / 1.5,
-    height: win.width / 1.5
+    height: win.width / 1.5,
+    marginTop: 15
   },
   background: {
     height: win.height,
@@ -94,7 +119,6 @@ const styles = StyleSheet.create({
   },
   border: {
     flex: 1,
-    flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -104,6 +128,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingTop: STATUSBAR_HEIGHT
   },
+  imageBackground: {
+    height: win.width / 1.10,
+    width: win.width / 1.25,
+    backgroundColor: '#fff',
+    alignItems: 'center'
+  },
+  noImage: {
+    backgroundColor: '#000',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  text: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginTop: 10
+  }
 });
 
 export default MainScreen;
