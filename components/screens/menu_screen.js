@@ -22,6 +22,9 @@ class MenuScreen extends Component {
         />
         <Border style={styles.border}>
           <Logo style={styles.logo}/>
+          <Text style={{ fontFamily: 'amatic-sc-regular', fontSize: 56 }}>
+            Hello, world!
+          </Text>
           <PlayButton action={() => { this.props.navigation.navigate('Main') }} />
           <GalleryPreview />
         </Border>
