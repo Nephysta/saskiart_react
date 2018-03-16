@@ -20,6 +20,7 @@ class PlayButton extends Component {
 
 const styles = StyleSheet.create({
   textButton: {
+    fontFamily: 'open-sans-condensed-light',
     fontSize: 32,
     color: '#fff'
   }

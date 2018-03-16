@@ -141,9 +141,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    fontFamily: 'AmaticSC-Regular',
+    fontFamily: 'shadows-into-light',
     textAlign: 'center',
-    marginTop: 10
+    marginTop: 20
   }
 });
 

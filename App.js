@@ -28,7 +28,9 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      'amatic-sc-regular': require('./assets/fonts/AmaticSC-Regular.ttf')
+      'shadows-into-light': require('./assets/fonts/ShadowsIntoLight.ttf'),
+      'open-sans-condensed-light-italic': require('./assets/fonts/OpenSansCondensed-LightItalic.ttf'),
+      'open-sans-condensed-light': require('./assets/fonts/OpenSansCondensed-Light.ttf')
     });
     this.setState({ fontLoaded: true })
   }
