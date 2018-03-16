@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
+    fontFamily: 'AmaticSC-Regular',
     textAlign: 'center',
     marginTop: 10
   }
