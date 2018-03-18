@@ -10,11 +10,14 @@ class GalleryPreview extends Component {
     this.state = {
       onLoad: props.onLoad,
       limit: props.limit || 3,
-      pictures: null,
+      pictures: [],
       action: props.action,
       theme_display: props.themeDisplay,
       ideas: props.ideas || null,
       didFetch: false
+    }
+    for (var i = 0; i < this.state.limit; i++) {
+      this.state.pictures.push(undefined)
     }
   }
 
@@ -33,14 +36,24 @@ class GalleryPreview extends Component {
 
     if (this.props.ideas && this.props.ideas.length == 0) { return }
 
+    const pictures = []
+    for (var i = 0; i < this.state.limit; i++) {
+      pictures.push(undefined)
+    }
+    this.setState({pictures: pictures})
+
     url = `${API_ENDPOINT}/api/v1/pictures?limit=${limit}`
     if (this.props.ideas) { url += `&ideas=${this.props.ideas}` }
 
     fetch(url)
       .then(response => response.json())
       .then(response => {
+        for (var i = response.length; i < limit; i++) {
+          response.push(null)
+        }
         this.setState({pictures: response})
         onLoad ? onLoad(this.state.pictures) : null
+
       })
   }
 
@@ -50,16 +63,27 @@ class GalleryPreview extends Component {
     if (pictures) {
       return (
         <View style={styles.container} >
-          {pictures.map((picture, i) => {
-            return <GalleryThumbnail
-              action={action ? (id) => {action(id)} : null}
-              id={picture.id}
-              key={picture.id}
-              number={limit}
-              theme={theme_display ? picture.theme : null}
-              image={picture.data}
-            />
-          })}
+          {
+            pictures.map((picture, i) => {
+              if (picture) {
+                return <GalleryThumbnail
+                  action={action ? (id) => {action(id)} : null}
+                  id={picture.id}
+                  key={picture.id}
+                  number={limit}
+                  theme={theme_display ? picture.theme : null}
+                  image={picture.data}
+                />
+              }
+              else {
+                return <GalleryThumbnail
+                  key={Math.random().toString(36).substring(2, 15)}
+                  number={limit}
+                  image={picture}
+                />
+              }
+            })
+          }
         </View>
       );
     }

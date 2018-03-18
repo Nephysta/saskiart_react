@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, Dimensions, Image, View, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Text, StyleSheet, Dimensions, Image, View, TouchableOpacity } from 'react-native';
 
 class GalleryThumbnail extends Component {
   constructor(props) {
@@ -16,28 +16,62 @@ class GalleryThumbnail extends Component {
 
   render() {
     const { id, theme, image, action } = this.state
-    return (
-      <TouchableOpacity
-        activeOpacity={action ? 0.6 : 1}
-        style={styles.image_container}
-        onPress={_ => { action ? action({id: id, theme: theme, data: image}) : null}}
-      >
+    if (image) {
+      return (
+        <TouchableOpacity
+          activeOpacity={action ? 0.6 : 1}
+          style={styles.image_container}
+          onPress={_ => { action ? action({id: id, theme: theme, data: image}) : null}}
+        >
+          <Image
+            style={{
+              width: win.width / (this.state.number + 1),
+              height: win.width / (this.state.number + 1),
+              margin: 10
+            }}
+            source={{uri: image}}
+          />
+          <Text numberOfLines={2} style={theme ? styles.image_text : {}} >{theme}</Text>
+        </TouchableOpacity>
+      )
+    }
+    else if (image === undefined) {
+      return (
+        <View
+          style={[
+              styles.loaderContainer,
+              {height: win.width / (this.state.number + 1), width: win.width / (this.state.number + 1)}
+          ]}
+        >
+          <ActivityIndicator style={styles.loader} size='large' color='#f29bc1' />
+        </View>
+      )
+    }
+    else {
+      return (
         <Image
           style={{
             width: win.width / (this.state.number + 1),
             height: win.width / (this.state.number + 1),
             margin: 10
           }}
-          source={{uri: image}}
+          source={require('../assets/img/placeholder_image.png')}
         />
-        <Text numberOfLines={2} style={theme ? styles.image_text : {}} >{theme}</Text>
-      </TouchableOpacity>
-    );
+      )
+    }
   }
 }
 
 const win = Dimensions.get('window')
 const styles = StyleSheet.create({
+  loaderContainer: {
+    backgroundColor: '#000',
+    margin: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  loader: {
+  },
   image_container: {
     position: 'relative'
   },
