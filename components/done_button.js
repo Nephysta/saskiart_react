@@ -20,6 +20,7 @@ class DoneButton extends Component {
 
 const styles = StyleSheet.create({
   textButton: {
+    fontFamily: 'open-sans-condensed-light',
     fontSize: 12,
     color: '#fff'
   }

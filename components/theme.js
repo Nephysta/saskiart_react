@@ -40,7 +40,7 @@ class Theme extends Component {
           >
             <Text style={ styles.text }>{ theme.text }</Text>
           </TouchableOpacity>
-          <Text style={ { textAlign: 'center' } }>Tap to reload.</Text>
+          <Text style={ { fontFamily:'open-sans-condensed-light-italic', textAlign: 'center' } }>Tap to reload.</Text>
         </View>
       )
     }
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f29bc1'
   },
   text: {
+    fontFamily: 'open-sans-condensed-light',
     padding: 10,
     fontSize: 24,
     textAlign: 'center',

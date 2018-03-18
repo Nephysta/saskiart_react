@@ -141,8 +141,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
+    fontFamily: 'shadows-into-light',
     textAlign: 'center',
-    marginTop: 10
+    marginTop: 20
   }
 });
 
